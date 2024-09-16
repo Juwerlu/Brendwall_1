@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <script
+      src="https://code.jquery.com/jquery-3.6.3.js"
+      integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM="
+      crossorigin="anonymous">
+    </script>
+    <meta charset="utf-8">
+    <title>Добавление продукта</title>
+    {% load django_bootstrap5 %}
+    {% bootstrap_css %}
+  </head>
+  <body>
+    <div class="container pt-5">
+      <div class="card col-4">
+        <div class="card-header">
+          Добавление продукта
+        </div>
+        <div class="card-body">
+          <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            {% bootstrap_form form %}
+            {% bootstrap_button button_type="submit" content="Отправить" %}
+          </form>
+        </div>
+        <br>
+      </div>
+      <div class="card col-6">
+        <table class="table">
+          <thead class="thead-dark">
+            <tr>
+              <th scope="col">Название</th>
+              <th scope="col">Описание</th>
+              <th scope="col">Цена</th>
+            </tr>
+          </thead>
+          <tbody>
+          {% for product in object_list %}
+            <tr>
+              <th>{{ product.name }}</th>
+              <th>{{ product.description }}</th>
+              <th>{{ product.price }}</th>
+            </tr>
+          {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </body>
+</html>
